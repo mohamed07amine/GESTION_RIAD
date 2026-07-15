@@ -1,0 +1,15 @@
+# Dépendances
+node_modules/
+.next/
+dist/
+
+# Variables d'environnement (Sécurité !)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Fichiers système
+.DS_Store
+Thumbs.db

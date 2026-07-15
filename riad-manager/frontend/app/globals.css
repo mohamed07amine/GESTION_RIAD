@@ -1,0 +1,254 @@
+/* =============================================================
+   globals.css — Riad Manager Global Styles
+   Tailwind base + custom design tokens
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  --gold-primary:    #d99a1f;
+  --gold-light:      #efc96b;
+  --gold-dark:       #b87a17;
+  --bg-dark:         #0f0a05;
+  --bg-card:         #1a110a;
+  --bg-panel:        #251808;
+  --border-subtle:   #3d2b1a;
+  --text-primary:    #f5e6cc;
+  --text-secondary:  #b89a72;
+  --text-muted:      #7a5c3a;
+}
+
+/* ── Base Reset ────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-riad-dark text-amber-50;
+    font-family: 'Inter', sans-serif;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(217,154,31,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(217,154,31,0.04) 0%, transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    @apply text-amber-50;
+    line-height: 1.2;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  input, textarea, select {
+    @apply outline-none;
+  }
+}
+
+/* ── Component Classes ─────────────────────────────────────── */
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl font-semibold text-sm
+           bg-gradient-to-r from-gold-600 to-gold-400
+           text-riad-dark
+           transition-all duration-300
+           hover:from-gold-500 hover:to-gold-300
+           hover:shadow-gold-md hover:scale-[1.02]
+           active:scale-[0.98]
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           px-6 py-3 rounded-xl font-semibold text-sm
+           border border-gold-600 text-gold-400
+           transition-all duration-300
+           hover:bg-gold-600 hover:text-riad-dark
+           hover:shadow-gold-sm
+           active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-lg text-sm text-gold-400
+           transition-all duration-200
+           hover:bg-riad-panel hover:text-gold-300;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-lg text-sm font-medium
+           bg-red-900/40 text-red-400 border border-red-800
+           transition-all duration-200
+           hover:bg-red-800/60 hover:text-red-300;
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-riad-card border border-riad-border rounded-2xl
+           shadow-card overflow-hidden
+           transition-all duration-300
+           hover:border-gold-600/40 hover:shadow-gold-sm;
+  }
+
+  .card-glass {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10
+           rounded-2xl shadow-card;
+  }
+
+  /* ── Form inputs ── */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-riad-panel border border-riad-border
+           text-amber-50 placeholder-gray-400
+           text-sm
+           transition-all duration-200
+           focus:border-gold-500 focus:ring-2 focus:ring-gold-500/20
+           focus:bg-riad-panel;
+  }
+
+  .input-label {
+    @apply block text-xs font-semibold text-gold-400 mb-1.5 tracking-wider uppercase;
+  }
+
+  /* ── Section ── */
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-amber-50;
+  }
+
+  .section-subtitle {
+    @apply text-text-secondary mt-3 max-w-xl;
+  }
+
+  /* ── Gold divider ── */
+  .gold-divider {
+    @apply flex items-center gap-4 my-6;
+  }
+
+  .gold-divider::before,
+  .gold-divider::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-gold-600 to-transparent;
+  }
+
+  /* ── Badge ── */
+  .badge-available {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-emerald-900/40 text-emerald-400 border border-emerald-800;
+  }
+
+  .badge-unavailable {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-red-900/40 text-red-400 border border-red-800;
+  }
+
+  .badge-status-en_attente {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-amber-900/40 text-amber-400 border border-amber-800;
+  }
+
+  .badge-status-confirmee {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-emerald-900/40 text-emerald-400 border border-emerald-800;
+  }
+
+  .badge-status-annulee {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-red-900/40 text-red-400 border border-red-800;
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    @apply fixed top-0 inset-x-0 z-50
+           border-b border-riad-border
+           backdrop-blur-xl bg-riad-dark/80;
+  }
+
+  /* ── Modal overlay ── */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4
+           bg-black/70 backdrop-blur-sm;
+  }
+
+  .modal-box {
+    @apply w-full max-w-lg
+           bg-riad-card border border-riad-border rounded-2xl
+           shadow-[0_24px_64px_rgba(0,0,0,0.8)]
+           animate-fade-up;
+  }
+}
+
+/* ── Utilities ─────────────────────────────────────────────── */
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #efc96b 0%, #d99a1f 50%, #b87a17 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dark) var(--bg-panel);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: var(--bg-panel);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: var(--gold-dark);
+    border-radius: 9999px;
+  }
+
+  /* Moroccan ornament pattern via CSS */
+  .bg-zellige {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d99a1f' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+/* ── Custom scrollbar for whole page ──────────────────────── */
+::-webkit-scrollbar        { width: 8px; }
+::-webkit-scrollbar-track  { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb  { background: var(--gold-dark); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
